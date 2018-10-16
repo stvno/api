@@ -22,7 +22,7 @@ module.exports = {
           'phrase.default': {
             'analyzer': 'peliasPhrase',
             'type': 'phrase',
-            'boost': 1,
+            'boost': 0.5,
             'slop': 3,
             'query': 'test'
           }

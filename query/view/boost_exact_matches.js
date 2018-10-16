@@ -45,6 +45,10 @@ module.exports = function( includePartialTokens ){
     vsCopy.var('phrase:analyzer').set(searchDefaults['phrase:analyzer']);
     vsCopy.var('phrase:field').set(searchDefaults['phrase:field']);
 
+    if (includePartialTokens) {
+      vsCopy.var('phrase:boost').set(searchDefaults['phrase:boost'] * 0.5);
+    }
+
     // get a copy of only the *complete* tokens produced from the input:name
     var tokens = vs.var('input:name:tokens_complete').get();
 

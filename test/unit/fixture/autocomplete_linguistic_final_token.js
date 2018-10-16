@@ -26,7 +26,7 @@ module.exports = {
         'match': {
           'phrase.default': {
             'analyzer': 'peliasPhrase',
-            'boost': 1,
+            'boost': 0.5,
             'slop': 3,
             'query': 'one t',
             'type': 'phrase'
