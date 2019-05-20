@@ -5,16 +5,14 @@ module.exports = {
         {
           'constant_score': {
             'query': {
-              'match': {
-                'name.default': {
-                  'analyzer': 'peliasQueryPartialToken',
-                  'boost': 100,
-                  'query': 'test',
-                  'cutoff_frequency': 0.01,
-                  'type': 'phrase',
-                  'operator': 'and',
-                  'slop': 3
-                }
+              'multi_match': {
+                'fields': ['name.default^100', 'name.en^200'],
+                'analyzer': 'peliasQueryPartialToken',
+                'query': 'test',
+                'cutoff_frequency': 0.01,
+                'type': 'phrase',
+                'operator': 'and',
+                'slop': 3
               }
             }
           }

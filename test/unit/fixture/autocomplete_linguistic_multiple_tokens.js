@@ -1,31 +1,29 @@
 module.exports = {
   'query': {
     'bool': {
-      'must': [{
-        'match': {
-          'name.default': {
-            'analyzer': 'peliasQueryFullToken',
-            'type': 'phrase',
-            'boost': 1,
-            'slop': 3,
-            'cutoff_frequency': 0.01,
-            'query': 'one two'
-          }
+      'must': [
+      {
+        'multi_match': {
+          'fields': ['name.default^1', 'name.en^2'],
+          'analyzer': 'peliasQueryFullToken',
+          'query': 'one two',
+          'cutoff_frequency': 0.01,
+          'type': 'phrase',
+          'operator': 'and',
+          'slop': 3
         }
       },
       {
         'constant_score': {
           'query': {
-            'match': {
-              'name.default': {
-                'analyzer': 'peliasQueryPartialToken',
-                'boost': 100,
-                'query': 'three',
-                'type': 'phrase',
-                'operator': 'and',
-                'cutoff_frequency': 0.01,
-                'slop': 3
-              }
+            'multi_match': {
+              'fields': ['name.default^100', 'name.en^200'],
+              'analyzer': 'peliasQueryPartialToken',
+              'query': 'three',
+              'cutoff_frequency': 0.01,
+              'type': 'phrase',
+              'operator': 'and',
+              'slop': 3
             }
           }
         }

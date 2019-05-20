@@ -3,15 +3,14 @@ module.exports = {
     'bool': {
       'must': [
         {
-          'match': {
-            'name.default': {
-              'analyzer': 'peliasQueryFullToken',
-              'type': 'phrase',
-              'boost': 1,
-              'slop': 3,
-              'cutoff_frequency': 0.01,
-              'query': 'one two'
-            }
+          'multi_match': {
+            'fields': ['name.default^1', 'name.en^2'],
+            'analyzer': 'peliasQueryFullToken',
+            'query': 'one two',
+            'cutoff_frequency': 0.01,
+            'type': 'phrase',
+            'operator': 'and',
+            'slop': 3
           }
         }
       ],
