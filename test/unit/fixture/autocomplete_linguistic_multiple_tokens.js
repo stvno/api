@@ -4,7 +4,7 @@ module.exports = {
       'must': [
       {
         'multi_match': {
-          'fields': ['name.default^1', 'name.en^2'],
+          'fields': ['name.default^1', 'name.en^1'],
           'analyzer': 'peliasQueryFullToken',
           'query': 'one two',
           'cutoff_frequency': 0.01,
@@ -17,7 +17,7 @@ module.exports = {
         'constant_score': {
           'query': {
             'multi_match': {
-              'fields': ['name.default^100', 'name.en^200'],
+              'fields': ['name.default^100', 'name.en^100'],
               'analyzer': 'peliasQueryPartialToken',
               'query': 'three',
               'cutoff_frequency': 0.01,
@@ -30,15 +30,14 @@ module.exports = {
       }],
       'should':[
         {
-          'match': {
-            'phrase.default': {
-              'analyzer' : 'peliasPhrase',
-              'type' : 'phrase',
-              'boost' : 1,
-              'slop' : 3,
-              'cutoff_frequency': 0.01,
-              'query' : 'one two'
-            }
+          'multi_match': {
+            'fields': ['phrase.default^1', 'phrase.en^1'],
+            'operator': 'and',
+            'analyzer' : 'peliasPhrase',
+            'type' : 'phrase',
+            'slop' : 3,
+            'cutoff_frequency': 0.01,
+            'query' : 'one two'
           }
         },
         {

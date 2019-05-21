@@ -5,7 +5,7 @@ module.exports = {
         'constant_score': {
           'query': {
             'multi_match': {
-              'fields': ['name.default^100', 'name.en^200'],
+              'fields': ['name.default^100', 'name.en^100'],
               'analyzer': 'peliasQueryPartialToken',
               'query': 'test',
               'cutoff_frequency': 0.01,
@@ -19,16 +19,14 @@ module.exports = {
       'should': [{
         'function_score': {
           'query': {
-            'match': {
-              'name.default': {
-                'analyzer': 'peliasQueryPartialToken',
-                'cutoff_frequency': 0.01,
-                'boost': 100,
-                'query': 'test',
-                'type': 'phrase',
-                'operator': 'and',
-                'slop': 3
-              }
+            'multi_match': {
+              'fields': ['name.default^100', 'name.en^100'],
+              'analyzer': 'peliasQueryPartialToken',
+              'cutoff_frequency': 0.01,
+              'query': 'test',
+              'type': 'phrase',
+              'operator': 'and',
+              'slop': 3
             }
           },
           'functions': [{

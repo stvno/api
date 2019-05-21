@@ -4,7 +4,7 @@ module.exports = {
       'must': [
         {
           'multi_match': {
-            'fields': ['name.default^1', 'name.en^2'],
+            'fields': ['name.default^1', 'name.en^1'],
             'analyzer': 'peliasQueryFullToken',
             'query': 'one two',
             'cutoff_frequency': 0.01,
@@ -96,15 +96,14 @@ module.exports = {
           }
         },
         {
-          'match': {
-            'phrase.default': {
-              'analyzer' : 'peliasPhrase',
-              'cutoff_frequency': 0.01,
-              'type' : 'phrase',
-              'boost' : 1,
-              'slop' : 3,
-              'query' : 'one two'
-            }
+          'multi_match': {
+            'fields': ['phrase.default^1', 'phrase.en^1'],
+            'operator': 'and',
+            'analyzer' : 'peliasPhrase',
+            'cutoff_frequency': 0.01,
+            'type' : 'phrase',
+            'slop' : 3,
+            'query' : 'one two'
           }
         },
         {

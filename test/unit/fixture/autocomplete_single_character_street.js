@@ -3,7 +3,7 @@ module.exports = {
     'bool': {
       'must': [{
         'multi_match': {
-          'fields': ['name.default^1', 'name.en^2'],
+          'fields': ['name.default^1', 'name.en^1'],
           'analyzer': 'peliasQueryFullToken',
           'query': 'k road',
           'cutoff_frequency': 0.01,
@@ -96,15 +96,14 @@ module.exports = {
           }
         },
         {
-          'match': {
-            'phrase.default': {
-              'analyzer' : 'peliasPhrase',
-              'type' : 'phrase',
-              'boost' : 1,
-              'slop' : 3,
-              'cutoff_frequency': 0.01,
-              'query' : 'k road'
-            }
+          'multi_match': {
+            'fields': ['phrase.default^1', 'phrase.en^1'],
+            'operator': 'and',
+            'analyzer' : 'peliasPhrase',
+            'type' : 'phrase',
+            'slop' : 3,
+            'cutoff_frequency': 0.01,
+            'query' : 'k road'
           }
         },
         {

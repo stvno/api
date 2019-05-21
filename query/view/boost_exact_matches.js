@@ -1,5 +1,6 @@
-var peliasQuery = require('pelias-query'),
-    searchDefaults = require('../search_defaults');
+const peliasQuery = require('pelias-query');
+const searchDefaults = require('../search_defaults');
+const lang_multi_match = require('./lang_multi_match');
 
 /**
   This view (unfortunately) requires autocomplete to use the phrase.* index.
@@ -23,8 +24,8 @@ module.exports = function( vs ){
   var vsCopy = new peliasQuery.Vars( vs.export() );
 
   // copy phrase:* values from search defaults
-  vsCopy.var('phrase:analyzer').set(searchDefaults['phrase:analyzer']);
-  vsCopy.var('phrase:field').set(searchDefaults['phrase:field']);
+  vsCopy.var('lang_multi_match:analyzer').set(searchDefaults['phrase:analyzer']);
+  vsCopy.var('lang_multi_match:field').set(searchDefaults['phrase:field']);
 
   // get a copy of the *complete* tokens produced from the input:name
   var tokens = vs.var('input:name:tokens_complete').get();
@@ -35,5 +36,5 @@ module.exports = function( vs ){
   // set 'input:name' to be only the fully completed characters
   vsCopy.var('input:name').set( tokens.join(' ') );
 
-  return peliasQuery.view.phrase( vsCopy );
+  return lang_multi_match( vsCopy );
 };
