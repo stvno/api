@@ -7,6 +7,7 @@ module.exports = {
         'match': {
           'name.default': {
             'query': '1 water st',
+            'operator': 'and',
             'cutoff_frequency': 0.01,
             'analyzer': 'peliasQueryFullToken',
             'boost': 1

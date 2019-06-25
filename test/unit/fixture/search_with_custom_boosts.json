@@ -7,6 +7,7 @@
           "match": {
             "name.default": {
               "query": "test",
+              "operator": "and",
               "boost": 1,
               "cutoff_frequency": 0.01,
               "analyzer": "peliasQueryFullToken"

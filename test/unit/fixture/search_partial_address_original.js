@@ -7,6 +7,7 @@ module.exports = {
         'match': {
           'name.default': {
             'query': 'soho grand',
+            'operator': 'and',
             'cutoff_frequency': 0.01,
             'analyzer': 'peliasQueryFullToken',
             'boost': 1

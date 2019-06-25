@@ -6,6 +6,7 @@ module.exports = {
           'match': {
             'name.default': {
               'query': 'test',
+              'operator': 'and',
               'cutoff_frequency': 0.01,
               'boost': 1,
               'analyzer': 'peliasQueryFullToken'
