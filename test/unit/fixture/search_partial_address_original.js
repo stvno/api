@@ -8,7 +8,7 @@ module.exports = {
           'name.default': {
             'query': 'soho grand',
             'cutoff_frequency': 0.01,
-            'analyzer': 'peliasQueryFullToken',
+            'analyzer': 'peliasQuery',
             'boost': 1
           }
         }
